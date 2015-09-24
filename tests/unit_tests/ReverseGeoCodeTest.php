@@ -2,8 +2,7 @@
 
 namespace PhotoInspector\UnitTests;
 
-use PhotoInspector\Domain;
-use PhotoInspector\Google;
+use PhotoInspector\Utils;
 
 class ReverseGeoCodeTest extends \PHPUnit_Framework_TestCase
 {
@@ -18,7 +17,7 @@ class ReverseGeoCodeTest extends \PHPUnit_Framework_TestCase
         $ADMIN_AREA_1 = 'NY';
         $COUNTRY = 'US';
 
-        $reverse_geo_code = new Domain\ReverseGeoCode(
+        $reverse_geo_code = new Utils\ReverseGeoCode(
             $STREET_ADDRESS, $NEIGHBORHOOD, $SUB_LOCALITY, $LOCALITY,
             $POSTAL_CODE, $ADMIN_AREA_2, $ADMIN_AREA_1, $COUNTRY);
 

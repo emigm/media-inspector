@@ -6,5 +6,5 @@ use PhotoInspector\Utils;
 
 interface iReverseGeoCode
 {
-    public function getReverseGeoCode($api_key, Utils\GeoPoint $location);
+    public function getReverseGeoCode(Utils\GeoPoint $location);
 }

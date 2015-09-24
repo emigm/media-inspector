@@ -13,16 +13,17 @@ class Maps implements Domain\iReverseGeoCode
 
     private $rest_client;
 
-    function __construct($rest_client)
+    function __construct($api_key, $rest_client)
     {
+        $this->api_key = $api_key;
         $this->rest_client = $rest_client;
     }
 
-    public function getReverseGeoCode($api_key, Utils\GeoPoint $location)
+    public function getReverseGeoCode(Utils\GeoPoint $geo_point)
     {
         $uri = self::GEOCODE_URI;
-        $lat_lng = $location->getLatitude().','.$location->getLongitude();
-        $query = ['latlng' => $lat_lng, 'key' => $api_key];
+        $lat_lng = $geo_point->getLatitude().','.$geo_point->getLongitude();
+        $query = ['latlng' => $lat_lng, 'key' => $this->api_key];
 
         try {
             $response = $this->rest_client->get($uri, $query);
@@ -71,7 +72,7 @@ class Maps implements Domain\iReverseGeoCode
             }
         }
 
-        $reverse_geo_code = new Domain\ReverseGeoCode(
+        $reverse_geo_code = new Utils\ReverseGeoCode(
             $street_address, $neighborhood, $sub_locality, $locality,
             $postal_code, $admin_area_2, $admin_area_1, $country);
 

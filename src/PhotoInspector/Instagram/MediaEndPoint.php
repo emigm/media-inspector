@@ -7,21 +7,22 @@ use PhotoInspector\Exception;
 use PhotoInspector\RESTAdapter;
 use PhotoInspector\Utils;
 
-class MediaInspector implements Domain\iMediaInfo
+class MediaEndPoint implements Domain\iMedia
 {
     const MEDIA_URI = '/v1/media/';
 
     private $rest_client;
 
-    function __construct($rest_client)
+    function __construct($access_token, $rest_client)
     {
+        $this->access_token = $access_token;
         $this->rest_client = $rest_client;
     }
 
-    public function getMediaInfo($access_token, $media_id)
+    public function getMedia($media_id)
     {
         $uri = self::MEDIA_URI.$media_id;
-        $query = ['access_token' => $access_token];
+        $query = ['access_token' => $this->access_token];
 
         try {
             $response = $this->rest_client->get($uri, $query);
@@ -37,15 +38,15 @@ class MediaInspector implements Domain\iMediaInfo
         $type = (isset($decoded_response['data']['type'])) ? $decoded_response['data']['type'] : NULL;
 
         if (!is_null($decoded_response['data']['location'])) {
-            $location = new Utils\GeoPoint(
+            $geo_point = new Utils\GeoPoint(
                 $decoded_response['data']['location']['latitude'],
                 $decoded_response['data']['location']['longitude']);
         } else {
-            $location = NULL;
+            $geo_point = NULL;
         }
 
-        $media_info = new Domain\MediaInfo($id, $type, $location);
+        $media = new Media($id, $type, $geo_point);
 
-        return $media_info;
+        return $media;
     }
 }

@@ -2,7 +2,6 @@
 
 namespace PhotoInspector\UnitTests;
 
-use PhotoInspector\Domain;
 use PhotoInspector\Google;
 use PhotoInspector\Utils;
 
@@ -23,13 +22,13 @@ class MapsTest extends \PHPUnit_Framework_TestCase
                          ->method('get')
                          ->will($this->returnValue(self::RESPONSE_COMPLETE));
 
-        $maps = new Google\Maps($rest_client_stub);
-
         $API_KEY = 'api.key.123';
-        $LOCATION = new Utils\GeoPoint('40.7155418', '-73.9533691');
+        $maps = new Google\Maps($API_KEY, $rest_client_stub);
 
-        $reverse_geo_code = $maps->getReverseGeoCode($API_KEY, $LOCATION);
-        $expected_reverse_geo_code = new Domain\ReverseGeoCode(
+        $GEO_POINT = new Utils\GeoPoint('40.7155418', '-73.9533691');
+        $reverse_geo_code = $maps->getReverseGeoCode($GEO_POINT);
+
+        $expected_reverse_geo_code = new Utils\ReverseGeoCode(
             '277 Bedford Ave, Brooklyn, NY 11211, USA', 'Williamsburg',
             'Brooklyn', 'NY', '11211', 'Kings County', 'NY', 'US');
 
@@ -45,13 +44,13 @@ class MapsTest extends \PHPUnit_Framework_TestCase
                          ->method('get')
                          ->will($this->returnValue(self::RESPONSE_PARTIAL));
 
-        $maps = new Google\Maps($rest_client_stub);
-
         $API_KEY = 'api.key.123';
-        $LOCATION = new Utils\GeoPoint('40.7155418', '-73.9533691');
+        $maps = new Google\Maps($API_KEY, $rest_client_stub);
 
-        $reverse_geo_code = $maps->getReverseGeoCode($API_KEY, $LOCATION);
-        $expected_reverse_geo_code = new Domain\ReverseGeoCode(
+        $GEO_POINT = new Utils\GeoPoint('40.7155418', '-73.9533691');
+        $reverse_geo_code = $maps->getReverseGeoCode($GEO_POINT);
+
+        $expected_reverse_geo_code = new Utils\ReverseGeoCode(
             NULL, 'Williamsburg', 'Brooklyn', 'NY', '11211', 'Kings County',
             'NY', 'US');
 
@@ -67,13 +66,13 @@ class MapsTest extends \PHPUnit_Framework_TestCase
                          ->method('get')
                          ->will($this->returnValue(self::RESPONSE_EMPTY));
 
-        $maps = new Google\Maps($rest_client_stub);
-
         $API_KEY = 'api.key.123';
-        $LOCATION = new Utils\GeoPoint('40.7155418', '-73.9533691');
+        $maps = new Google\Maps($API_KEY, $rest_client_stub);
 
-        $reverse_geo_code = $maps->getReverseGeoCode($API_KEY, $LOCATION);
-        $expected_reverse_geo_code = new Domain\ReverseGeoCode(
+        $GEO_POINT = new Utils\GeoPoint('40.7155418', '-73.9533691');
+        $reverse_geo_code = $maps->getReverseGeoCode($GEO_POINT);
+
+        $expected_reverse_geo_code = new Utils\ReverseGeoCode(
             NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
         $this->assertEquals($expected_reverse_geo_code, $reverse_geo_code);
