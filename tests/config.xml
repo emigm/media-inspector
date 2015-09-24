@@ -1,0 +1,8 @@
+<phpunit bootstrap="../vendor/autoload.php">
+  <testsuites>
+    <testsuite name="Photo Inspector Test Suite">
+      <directory>./*Test.php files</directory>
+      <file>./unit_test/RestClientTest.php</file>
+    </testsuite>
+  </testsuites>
+</phpunit>

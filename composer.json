@@ -1,0 +1,18 @@
+{
+    "require": {
+        "guzzlehttp/guzzle": "~6.0",
+        "silex/silex": "~1.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.8"
+    },
+    "autoload" : {
+        "psr-4" : {
+            "PhotoInspector\\":                 "src/PhotoInspector/",
+            "PhotoInspector\\Instagram\\":      "src/PhotoInspector/Instagram/",
+            "PhotoInspector\\RESTAdapter\\":    "src/PhotoInspector/RESTAdapter/",
+            "PhotoInspector\\Utils\\":          "src/PhotoInspector/Utils/",
+            "PhotoInspector\\UnitTests\\":      "tests/unit_tests/"
+        }
+    }
+}
