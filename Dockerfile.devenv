@@ -24,8 +24,8 @@ WORKDIR /var/www
 # Deploy application
 COPY . /var/www
 
-# Install application dependencies
-RUN composer install --prefer-dist
+# Create mount point
+VOLUME /var/www
 
-ENTRYPOINT ["php", "-S"]
-CMD ["0.0.0.0:80"]
+ENTRYPOINT ["/bin/sh", "-c"]
+CMD ["echo"]
