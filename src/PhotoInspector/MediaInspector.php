@@ -2,24 +2,22 @@
 
 namespace PhotoInspector;
 
-use PhotoInspector\Domain
-use PhotoInspector\Google;
-use PhotoInspector\Instagram;
+use PhotoInspector\Domain;
 
 class MediaInspector 
 {
-    function __construct(Domain\iMedia media_endpoint, Domain\iReverseGeoCode geo_coder)
+    function __construct(Domain\iMedia $media_endpoint, Domain\iReverseGeoCode $maps)
     {
-        $this->geo_coder = $geo_coder;
+        $this->maps = $maps;
         $this->media_endpoint = $media_endpoint;        
     }
 
     public function getMediaInfo($media_id)
     {
         $media = $this->media_endpoint->getMedia($media_id);
-        $reverse_geo_code = $this->geo_coder->getReverseGeoCode($media->getGeoPoint());
+        $reverse_geo_code = $this->maps->getReverseGeoCode($media->getGeoPoint());
 
-        $media_info = new MediaInfo(
+        $media_info = new Domain\MediaInfo(
             $media->getId(), $media->getType(), $media->getGeoPoint(),
             $reverse_geo_code);
 
