@@ -4,14 +4,14 @@ namespace PhotoInspector\Utils;
 
 class ReverseGeoCode
 {
-    private $street_address;
-    private $neighborhood;
-    private $sub_locality;
-    private $locality;
-    private $postal_code;
-    private $admin_area_2;
-    private $admin_area_1;
-    private $country;
+    private $street_address = NULL;
+    private $neighborhood = NULL;
+    private $sub_locality = NULL;
+    private $locality = NULL;
+    private $postal_code = NULL;
+    private $admin_area_2 = NULL;
+    private $admin_area_1 = NULL;
+    private $country = NULL;
 
     function __construct(
         $street_address, $neighborhood, $sub_locality, $locality, $postal_code,
@@ -65,5 +65,19 @@ class ReverseGeoCode
     public function getPostalCode()
     {
         return $this->postal_code;
-    }    
+    }
+
+    public function toArray()
+    {
+        $array['streetAddress'] = $this->street_address;
+        $array['neighborhood'] = $this->neighborhood;
+        $array['subLocality'] = $this->sub_locality;
+        $array['locality'] = $this->locality;
+        $array['postalCode'] = $this->postal_code;
+        $array['adminArea1'] = $this->admin_area_2;
+        $array['adminArea2'] = $this->admin_area_1;
+        $array['country'] = $this->country;
+
+        return $array;
+    }
 }

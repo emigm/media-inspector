@@ -28,4 +28,12 @@ class GeoPoint
     {
         return $this->longitude;
     }
+
+    public function toArray()
+    {
+        $array['latitude'] = $this->latitude;
+        $array['longitude'] = $this->longitude;
+
+        return $array;
+    }
 }

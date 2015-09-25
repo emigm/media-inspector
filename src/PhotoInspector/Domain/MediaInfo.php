@@ -6,11 +6,11 @@ use PhotoInspector\Utils;
 
 class MediaInfo 
 {
-    private $id;
-    private $geo_point;
-    private $name;
-    private $reverse_geo_code;
-    private $type;
+    private $id = NULL;
+    private $geo_point = NULL;
+    private $name = NULL;
+    private $reverse_geo_code = NULL;
+    private $type = NULL;
 
     public function __construct(
         $id, $type, Utils\GeoPoint $geo_point = NULL,Utils\ReverseGeoCode $reverse_geo_code = NULL)
@@ -45,5 +45,15 @@ class MediaInfo
     public function getReverseGeoCode()
     {
         return $this->reverse_geo_code;
+    }
+
+    public function toArray()
+    {
+        $array['id'] = $this->id;
+        $array['type'] = $this->type;
+        $array['location']['geoPoint'] = $this->geo_point->toArray();
+        $array['location']['reverseGeoCode'] = $this->reverse_geo_code->toArray();
+
+        return $array;
     }
 }

@@ -15,7 +15,9 @@ class MediaInspector
     public function getMediaInfo($media_id)
     {
         $media = $this->media_endpoint->getMedia($media_id);
-        $reverse_geo_code = $this->maps->getReverseGeoCode($media->getGeoPoint());
+        if (!is_null($media->getGeoPoint())) {
+            $reverse_geo_code = $this->maps->getReverseGeoCode($media->getGeoPoint());
+        }
 
         $media_info = new Domain\MediaInfo(
             $media->getId(), $media->getType(), $media->getGeoPoint(),

@@ -6,10 +6,10 @@ use PhotoInspector\Utils;
 
 class Media
 {
-    private $id;
-    private $geo_point;
-    private $name;
-    private $type;
+    private $id = NULL;
+    private $geo_point = NULL;
+    private $name = NULL;
+    private $type = NULL;
 
     public function __construct($id, $type, Utils\GeoPoint $geo_point = NULL)
     {
@@ -31,5 +31,14 @@ class Media
     public function getGeoPoint()
     {
         return $this->geo_point;
+    }
+
+    public function toArray()
+    {
+        $array['id'] = $this->id;
+        $array['type'] = $this->type;
+        $array['geoPoint'] = $this->geo_point->toArray();
+
+        return $array;
     }
 }

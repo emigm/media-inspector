@@ -29,7 +29,7 @@ $app->get('/media/{id}', function($id) use($app) {
         return $app->json($ex->getMessage(), 500);
     }
 
-    return 'Media '.$media_info->getId(); 
+    return $app->json($media_info->toArray(), 200); 
 }); 
 
 $app->run();
