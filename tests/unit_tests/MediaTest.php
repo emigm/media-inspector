@@ -1,9 +1,9 @@
 <?php
 
-namespace PhotoInspector\UnitTests;
+namespace MediaInspector\UnitTests;
 
-use PhotoInspector\Instagram;
-use PhotoInspector\Utils;
+use MediaInspector\Instagram;
+use MediaInspector\Utils;
 
 class MediaTest extends \PHPUnit_Framework_TestCase
 {

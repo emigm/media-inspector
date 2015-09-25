@@ -1,6 +1,6 @@
 <?php
 
-namespace PhotoInspector\RESTAdapter;
+namespace MediaInspector\RESTAdapter;
 
 interface iRESTful 
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace PhotoInspector;
+namespace MediaInspector;
 
-use PhotoInspector\Exception;
+use MediaInspector\Exception;
 
 require_once __DIR__.'/vendor/autoload.php'; 
 

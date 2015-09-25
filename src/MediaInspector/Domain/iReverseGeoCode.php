@@ -1,8 +1,8 @@
 <?php
 
-namespace PhotoInspector\Domain;
+namespace MediaInspector\Domain;
 
-use PhotoInspector\Utils;
+use MediaInspector\Utils;
 
 interface iReverseGeoCode
 {

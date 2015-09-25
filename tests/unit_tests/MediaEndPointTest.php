@@ -1,10 +1,10 @@
 <?php
 
-namespace PhotoInspector\UnitTests;
+namespace MediaInspector\UnitTests;
 
-use PhotoInspector\Domain;
-use PhotoInspector\Instagram;
-use PhotoInspector\Utils;
+use MediaInspector\Domain;
+use MediaInspector\Instagram;
+use MediaInspector\Utils;
 
 class MediaEndPointTest extends \PHPUnit_Framework_TestCase
 {
@@ -12,7 +12,7 @@ class MediaEndPointTest extends \PHPUnit_Framework_TestCase
     const RESPONSE_WITHOUT_LOCATION = "{\"meta\":{\"code\":200},\"data\":{\"attribution\":null,\"tags\":[\"lasvegas\",\"bellagio\"],\"type\": \"image\",\"location\":null,\"comments\":{\"count\":1,\"data\":[{\"created_time\":\"1323841318\",\"text\":\"Can't go wrong with penguins!\",\"from\":{\"username\":\"dantax\",\"profile_picture\": \"https://igcdn-photos-a-a.akamaihd.net/hphotos-ak-xaf1/t51.2885-19/11821846_1472631506391080_788481119_a.jpg\",\"id\":\"13024258\",\"full_name\":\"Simon Thornton\"},\"id\":\"531287441\"}]},\"filter\":\"Toaster\",\"created_time\":\"1323838561\",\"link\":\"https://instagram.com/p/ZCd4K/\",\"likes\":{\"count\":6,\"data\":[{\"username\":\"rodrigocdg\",\"profile_picture\":\"https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-19/11358931_387636098107297_921630946_a.jpg\",\"id\":\"1430577\",\"full_name\":\"Rodrigo\"},{\"username\":\"dantax\",\"profile_picture\":\"https://igcdn-photos-a-a.akamaihd.net/hphotos-ak-xaf1/t51.2885-19/11821846_1472631506391080_788481119_a.jpg\",\"id\":\"13024258\",\"full_name\":\"Simon Thornton\"},{\"username\":\"archivodemialma\",\"profile_picture\":\"https://igcdn-photos-e-a.akamaihd.net/hphotos-ak-xaf1/t51.2885-19/11351605_1659769907593756_481180149_a.jpg\",\"id\":\"2249350\",\"full_name\":\"\"},{\"username\":\"robotic_nerve\",\"profile_picture\":\"https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-19/s150x150/11375391_515890241892385_1799338737_a.jpg\",\"id\":\"4554433\",\"full_name\":\"Andrew\"}]},\"images\":{\"low_resolution\":{\"url\":\"https://scontent.cdninstagram.com/hphotos-xtp1/t51.2885-15/s320x320/e15/11142205_1619460198284426_1295204350_n.jpg\",\"width\":320,\"height\":320},\"thumbnail\":{\"url\":\"https://scontent.cdninstagram.com/hphotos-xtp1/t51.2885-15/s150x150/e15/11142205_1619460198284426_1295204350_n.jpg\",\"width\":150,\"height\":150},\"standard_resolution\":{\"url\":\"https://scontent.cdninstagram.com/hphotos-xtp1/t51.2885-15/e15/11142205_1619460198284426_1295204350_n.jpg\",\"width\":612,\"height\":612}},\"users_in_photo\":[],\"caption\":{\"created_time\":\"1323838561\",\"text\":\"#lasvegas #bellagio\",\"from\":{\"username\":\"mflart\",\"profile_picture\":\"https://igcdn-photos-c-a.akamaihd.net/hphotos-ak-xaf1/t51.2885-19/11428689_1447280178933730_1402542420_a.jpg\",\"id\":\"4190444\",\"full_name\":\"MFLART, Assoc. AIA, ASAI\"},\"id\":\"531148714\"},\"user_has_liked\":false,\"id\":\"420077066_4190444\",\"user\":{\"username\":\"mflart\",\"profile_picture\":\"https://igcdn-photos-c-a.akamaihd.net/hphotos-ak-xaf1/t51.2885-19/11428689_1447280178933730_1402542420_a.jpg\",\"id\": \"4190444\",\"full_name\":\"MFLART, Assoc. AIA, ASAI\"}}}";
 
     public function testGetMediaWithLocation() {
-        $rest_client_stub = $this->getMockBuilder('\PhotoInspector\RESTAdapeter\RESTClient')
+        $rest_client_stub = $this->getMockBuilder('\MediaInspector\RESTAdapeter\RESTClient')
                                  ->setMethods(array('get'))
                                  ->getMock();
 
@@ -33,8 +33,8 @@ class MediaEndPointTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected_media, $media);
     }
 
-    public function testGetMediaWithOutLocation() {
-        $rest_client_stub = $this->getMockBuilder('\PhotoInspector\RESTAdapeter\RESTClient')
+    public function testGetMediaWithoutLocation() {
+        $rest_client_stub = $this->getMockBuilder('\MediaInspector\RESTAdapeter\RESTClient')
                                  ->setMethods(array('get'))
                                  ->getMock();
 
@@ -48,7 +48,9 @@ class MediaEndPointTest extends \PHPUnit_Framework_TestCase
         $MEDIA_ID = '420077066';
         $media = $media_endpoint->getMedia($MEDIA_ID);
 
-        $expected_media = new Instagram\Media('420077066_4190444', 'image');
+        $expected_geo_point = new Utils\GeoPoint(NULL, NULL);
+        $expected_media = new Instagram\Media(
+            '420077066_4190444', 'image', $expected_geo_point);
 
         $this->assertEquals($expected_media, $media);
     }

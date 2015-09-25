@@ -1,8 +1,8 @@
 <?php
 
-namespace PhotoInspector\UnitTests;
+namespace MediaInspector\UnitTests;
 
-use PhotoInspector\Utils;
+use MediaInspector\Utils;
 
 class ReverseGeoCodeTest extends \PHPUnit_Framework_TestCase
 {

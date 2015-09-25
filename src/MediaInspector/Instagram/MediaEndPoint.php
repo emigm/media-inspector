@@ -1,11 +1,11 @@
 <?php
 
-namespace PhotoInspector\Instagram;
+namespace MediaInspector\Instagram;
 
-use PhotoInspector\Domain;
-use PhotoInspector\Exception;
-use PhotoInspector\RESTAdapter;
-use PhotoInspector\Utils;
+use MediaInspector\Domain;
+use MediaInspector\Exception;
+use MediaInspector\RESTAdapter;
+use MediaInspector\Utils;
 
 class MediaEndPoint implements Domain\iMedia
 {
@@ -34,16 +34,16 @@ class MediaEndPoint implements Domain\iMedia
 
         $decoded_response = json_decode($response, true);
 
-        $id = (isset($decoded_response['data']['id'])) ? $decoded_response['data']['id'] : NULL;
-        $type = (isset($decoded_response['data']['type'])) ? $decoded_response['data']['type'] : NULL;
+        $id = (isset($decoded_response['data']['id'])) ?
+            $decoded_response['data']['id'] : NULL;
+        $type = (isset($decoded_response['data']['type'])) ?
+            $decoded_response['data']['type'] : NULL;
 
-        if (!is_null($decoded_response['data']['location'])) {
-            $geo_point = new Utils\GeoPoint(
-                $decoded_response['data']['location']['latitude'],
-                $decoded_response['data']['location']['longitude']);
-        } else {
-            $geo_point = NULL;
-        }
+        $latitude = (isset($decoded_response['data']['location'])) ?
+            $decoded_response['data']['location']['latitude'] : NULL;
+        $longitude = (isset($decoded_response['data']['location'])) ?
+            $decoded_response['data']['location']['longitude'] : NULL;
+        $geo_point = new Utils\GeoPoint($latitude, $longitude);
 
         $media = new Media($id, $type, $geo_point);
 

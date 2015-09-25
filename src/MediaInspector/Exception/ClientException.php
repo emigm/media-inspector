@@ -1,6 +1,6 @@
 <?php
 
-namespace PhotoInspector\Exception;
+namespace MediaInspector\Exception;
 
 class ClientException extends \RuntimeException
 {}

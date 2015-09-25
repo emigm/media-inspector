@@ -1,6 +1,6 @@
 <?php
 
-namespace PhotoInspector\Domain;
+namespace MediaInspector\Domain;
 
 interface iMedia
 {

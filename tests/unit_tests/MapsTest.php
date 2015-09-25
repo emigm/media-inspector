@@ -1,9 +1,9 @@
 <?php
 
-namespace PhotoInspector\UnitTests;
+namespace MediaInspector\UnitTests;
 
-use PhotoInspector\Google;
-use PhotoInspector\Utils;
+use MediaInspector\Google;
+use MediaInspector\Utils;
 
 class MapsTest extends \PHPUnit_Framework_TestCase
 {
@@ -14,7 +14,7 @@ class MapsTest extends \PHPUnit_Framework_TestCase
     const RESPONSE_EMPTY = "{ \"results\" : [], \"status\" : \"OK\" }";
 
     public function testGetReverseGeoCode() {
-        $rest_client_stub = $this->getMockBuilder('\PhotoInspector\RESTAdapeter\RESTClient')
+        $rest_client_stub = $this->getMockBuilder('\MediaInspector\RESTAdapeter\RESTClient')
                                  ->setMethods(array('get'))
                                  ->getMock();
 
@@ -36,7 +36,7 @@ class MapsTest extends \PHPUnit_Framework_TestCase
     }
 
     public function testGetPartialReverseGeoCode() {
-        $rest_client_stub = $this->getMockBuilder('\PhotoInspector\RESTAdapeter\RESTClient')
+        $rest_client_stub = $this->getMockBuilder('\MediaInspector\RESTAdapeter\RESTClient')
                                  ->setMethods(array('get'))
                                  ->getMock();
 
@@ -58,7 +58,7 @@ class MapsTest extends \PHPUnit_Framework_TestCase
     }
 
     public function testGetEmptyReverseGeoCode() {
-        $rest_client_stub = $this->getMockBuilder('\PhotoInspector\RESTAdapeter\RESTClient')
+        $rest_client_stub = $this->getMockBuilder('\MediaInspector\RESTAdapeter\RESTClient')
                                  ->setMethods(array('get'))
                                  ->getMock();
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace PhotoInspector\Domain;
+namespace MediaInspector\Domain;
 
-use PhotoInspector\Utils;
+use MediaInspector\Utils;
 
 class MediaInfo 
 {
@@ -51,7 +51,7 @@ class MediaInfo
     {
         $array['id'] = $this->id;
         $array['type'] = $this->type;
-        $array['location']['geoPoint'] = $this->geo_point->toArray();
+        $array['location']['geoPoint'] = $this->geo_point->toArray();    
         $array['location']['reverseGeoCode'] = $this->reverse_geo_code->toArray();
 
         return $array;

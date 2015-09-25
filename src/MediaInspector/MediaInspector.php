@@ -1,8 +1,8 @@
 <?php
 
-namespace PhotoInspector;
+namespace MediaInspector;
 
-use PhotoInspector\Domain;
+use MediaInspector\Domain;
 
 class MediaInspector 
 {

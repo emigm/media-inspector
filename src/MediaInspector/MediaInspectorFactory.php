@@ -1,10 +1,10 @@
 <?php
 
-namespace PhotoInspector;
+namespace MediaInspector;
 
-use PhotoInspector\Google;
-use PhotoInspector\Instagram;
-use PhotoInspector\RESTAdapter;
+use MediaInspector\Google;
+use MediaInspector\Instagram;
+use MediaInspector\RESTAdapter;
 
 class MediaInspectorFactory
 {

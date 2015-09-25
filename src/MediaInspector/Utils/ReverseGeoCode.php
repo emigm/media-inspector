@@ -1,6 +1,6 @@
 <?php
 
-namespace PhotoInspector\Utils;
+namespace MediaInspector\Utils;
 
 class ReverseGeoCode
 {

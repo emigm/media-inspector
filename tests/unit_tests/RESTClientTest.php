@@ -1,8 +1,8 @@
 <?php
 
-namespace PhotoInspector\UnitTests;
+namespace MediaInspector\UnitTests;
 
-use PhotoInspector\RESTAdapter;
+use MediaInspector\RESTAdapter;
 
 class RESTClientTest extends \PHPUnit_Framework_TestCase
 {
@@ -39,7 +39,7 @@ class RESTClientTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException           PhotoInspector\Exception\ClientException
+     * @expectedException           MediaInspector\Exception\ClientException
      * @expectedExceptionMessage    NOT FOUND
      */
     public function testGetClientError()

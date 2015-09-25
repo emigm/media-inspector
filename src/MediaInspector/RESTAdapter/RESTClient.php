@@ -1,10 +1,10 @@
 <?php
 
-namespace PhotoInspector\RESTAdapter;
+namespace MediaInspector\RESTAdapter;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception as GuzzleException;
-use PhotoInspector\Exception as PhotoInspectorException;
+use MediaInspector\Exception as MediaInspectorException;
 
 class RESTClient implements iRESTful 
 {
@@ -72,13 +72,13 @@ class RESTClient implements iRESTful
             $request = $ex->getRequest();
             $response = $ex->getResponse();
 
-            throw new PhotoInspectorException\ClientException(
+            throw new MediaInspectorException\ClientException(
                 $response->getReasonPhrase(), $response->getStatusCode(), $ex);
         } catch (GuzzleException\ServerException $ex) {
             $request = $ex->getRequest();
             $response = $ex->getResponse();
 
-            throw new PhotoInspectorException\ServerException(
+            throw new MediaInspectorException\ServerException(
                 $response->getReasonPhrase(), $response->getStatusCode(), $ex);
         }
 

@@ -8,11 +8,11 @@
     },
     "autoload" : {
         "psr-4" : {
-            "PhotoInspector\\":                 "src/PhotoInspector/",
-            "PhotoInspector\\Instagram\\":      "src/PhotoInspector/Instagram/",
-            "PhotoInspector\\RESTAdapter\\":    "src/PhotoInspector/RESTAdapter/",
-            "PhotoInspector\\Utils\\":          "src/PhotoInspector/Utils/",
-            "PhotoInspector\\UnitTests\\":      "tests/unit_tests/"
+            "MediaInspector\\":                 "src/MediaInspector/",
+            "MediaInspector\\Instagram\\":      "src/MediaInspector/Instagram/",
+            "MediaInspector\\RESTAdapter\\":    "src/MediaInspector/RESTAdapter/",
+            "MediaInspector\\Utils\\":          "src/MediaInspector/Utils/",
+            "MediaInspector\\UnitTests\\":      "tests/unit_tests/"
         }
     }
 }

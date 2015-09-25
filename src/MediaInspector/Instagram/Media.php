@@ -1,8 +1,8 @@
 <?php
 
-namespace PhotoInspector\Instagram;
+namespace MediaInspector\Instagram;
 
-use PhotoInspector\Utils;
+use MediaInspector\Utils;
 
 class Media
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace PhotoInspector\Google;
+namespace MediaInspector\Google;
 
-use PhotoInspector\Domain;
-use PhotoInspector\Exception;
-use PhotoInspector\RESTAdapter;
-use PhotoInspector\Utils;
+use MediaInspector\Domain;
+use MediaInspector\Exception;
+use MediaInspector\RESTAdapter;
+use MediaInspector\Utils;
 
 class Maps implements Domain\iReverseGeoCode
 {
