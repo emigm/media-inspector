@@ -1,6 +1,7 @@
 {
     "require": {
         "guzzlehttp/guzzle": "~6.0",
+        "monolog/monolog": "*",
         "silex/silex": "~1.3"
     },
     "require-dev": {
