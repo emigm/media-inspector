@@ -40,3 +40,7 @@ ${container-id}
 ${eth0-ipv4}
 
 >> curl -XGET -H "Authorization: Bearer ${Instagram-Access-Token}" http://${eth0-ipv4}:80/media/{id}
+
+Stop service
+
+>> docker stop ${container-id}

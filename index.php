@@ -24,9 +24,9 @@ $app->get('/media/{id}', function($id) use($app) {
         $media_inspector = MediaInspectorFactory::create($access_token);
         $media_info = $media_inspector->getMediaInfo($id);
     } catch (Exception\ClientException $ex) {
-        return $app->json($ex->getMessage(), 400);
+        return $app->json(['error' => $ex->getMessage()], 400);
     } catch(\Exception $ex) {
-        return $app->json($ex->getMessage(), 500);
+        return $app->json(['error' => $ex->getMessage()], 500);
     }
 
     return $app->json($media_info->toArray(), 200); 

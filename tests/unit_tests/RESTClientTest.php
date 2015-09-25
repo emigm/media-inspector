@@ -39,8 +39,7 @@ class RESTClientTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException           MediaInspector\Exception\ClientException
-     * @expectedExceptionMessage    NOT FOUND
+     * @expectedException MediaInspector\Exception\ClientException
      */
     public function testGetClientError()
     {

@@ -25,15 +25,9 @@ class Maps implements Domain\iReverseGeoCode
         $lat_lng = $geo_point->getLatitude().','.$geo_point->getLongitude();
         $query = ['latlng' => $lat_lng, 'key' => $this->api_key];
 
-        try {
-            $response = $this->rest_client->get($uri, $query);
-        } catch (Exception\ClientException $ex) {
-            throw new \Exception("Error getting reverse geocode by Client Error");
-        } catch (Exception\ServerException $ex) {
-            throw new \Exception("Error getting reverse geocode by Server Error");
-        }
-
+        $response = $this->rest_client->get($uri, $query);
         $decoded_response = json_decode($response, true);
+
         $reverse_geo_code = $this->responseToReverseGeoCode($decoded_response);
 
         return $reverse_geo_code;

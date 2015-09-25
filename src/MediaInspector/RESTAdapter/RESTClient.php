@@ -73,13 +73,13 @@ class RESTClient implements iRESTful
             $response = $ex->getResponse();
 
             throw new MediaInspectorException\ClientException(
-                $response->getReasonPhrase(), $response->getStatusCode(), $ex);
+                $response->getBody(), $response->getStatusCode(), $ex);
         } catch (GuzzleException\ServerException $ex) {
             $request = $ex->getRequest();
             $response = $ex->getResponse();
 
             throw new MediaInspectorException\ServerException(
-                $response->getReasonPhrase(), $response->getStatusCode(), $ex);
+                $response->getBody(), $response->getStatusCode(), $ex);
         }
 
         return $response;

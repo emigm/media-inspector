@@ -24,14 +24,7 @@ class MediaEndPoint implements Domain\iMedia
         $uri = self::MEDIA_URI.$media_id;
         $query = ['access_token' => $this->access_token];
 
-        try {
-            $response = $this->rest_client->get($uri, $query);
-        } catch (Exception\ClientException $ex) {
-            throw new \Exception("Error getting media info by Client Error");
-        } catch (Exception\ServerException $ex) {
-            throw new \Exception("Error getting media info by Server Error");
-        }
-
+        $response = $this->rest_client->get($uri, $query);
         $decoded_response = json_decode($response, true);
 
         $id = (isset($decoded_response['data']['id'])) ?
