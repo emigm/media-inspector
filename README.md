@@ -25,14 +25,14 @@ Update Composer dependencies
 Run UnitTests
 
 >> docker run \
-    -e TEST_INSTAGRAM_ACCESS_TOKEN=37946071.de0b35a.4ad6041a05454637ad4f04f80f530841 \
+    -e TEST_INSTAGRAM_ACCESS_TOKEN=${YOUR_TOKEN} \
     -v $(pwd):/var/www quay.io/emigm/php-composer \
     "./vendor/bin/phpunit tests"
 
 Run the service from the development environment
 
 >> docker run \
-    -e GOOGLE_API_KEY=AIzaSyAJZS9xjpoN_CT7__iaqsxflGleHgL4QhA \
+    -e GOOGLE_API_KEY=${YOUR_API_KEY} \
     -e GOOGLE_ENDPOINT=https://maps.googleapis.com \
     -e INSTAGRAM_ENDPOINT=https://api.instagram.com \
     --name media_inspector_devenv \
@@ -42,7 +42,7 @@ Run the service from the development environment
 Run the service from the released version
 
 >> docker run \
-    -e GOOGLE_API_KEY=AIzaSyAJZS9xjpoN_CT7__iaqsxflGleHgL4QhA \
+    -e GOOGLE_API_KEY=${YOUR_API_KEY} \
     -e GOOGLE_ENDPOINT=https://maps.googleapis.com \
     -e INSTAGRAM_ENDPOINT=https://api.instagram.com \
     --name media_inspector \
