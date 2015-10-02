@@ -1,36 +1,108 @@
-# media-inspector
+# Media Inspector
 
-Docker Ready !
+Media Inspector is a PHP based web application that allow you to obtain information about a media entity uploaded to a social network
 
-You need to install Docker in your host
+## Installation
 
-http://docs.docker.com/installation/ubuntulinux/
+At Media Inspector we try to make your live easier. Due to that, we offer two way of installing it:
+- Installing from Source
+- Installing through Docker
 
-Download development environment
+We recommend the use of Docker because of the following advantages:
+- We also Dockerized the development environment, so you don't need to install anything on your development machine
+- Avoid side effects while running multiple applications in the same host
+- Failure isolation
+- Immutable Artifacts
+- Standarization
 
+### Installing from Source
+
+First of all, install the following dependencies
+- PHP 5.6+
+- A Git client
+
+Secondly, clone this repo into your working directory
+```
+>> git clone https://github.com/emigm/media-inspector.git media_inspector
+```
+
+Finaly, install the application requirements
+```
+>> curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+>> cd media_inspector
+>> composer install --prefer-dist
+```
+
+### The Docker Way
+
+First of all, install [Docker](http://docs.docker.com/installation/)
+
+That's it, this is all you need!
+
+There is a Docker image stored in [quay.io](https://quay.io/) with the latest version of Media Inspector.
+Also, a change in this respository triggers a new image build, so you will always run the latest version.
+
+## Usage
+
+Media Inspector is customized through environment variables to create immutable artifacts that can be run in any environment
+
+### Using Media Inspector after installing it from source
+
+```
+>> php -S localhost:8080
+```
+
+### Using Media Inspector after installing Docker
+
+Run the Media Inspector container.
+```
+>> docker run \
+    -e GOOGLE_API_KEY=$YOUR_API_KEY \
+    -e GOOGLE_ENDPOINT=https://maps.googleapis.com \
+    -e INSTAGRAM_ENDPOINT=https://api.instagram.com \
+    --name media_inspector \
+    quay.io/emigm/media-inspector
+```
+
+To check that everithing is working fine, follow these steps:
+- Get the container IP address. It will be used to perform an HTTP request to it 
+```
+>> docker exec media_inspector ip addr show eth0
+```
+- Perform a HTTP request replacing those values that starts with "$" with the correct one
+```
+>> curl -XGET -H "Authorization: Bearer $INSTAGRAM_ACCESS_TOKEN" http://$CONTAINER_IP:80/media/$MEDIA_ID
+```
+- Stop Media Inspector
+```
+>> docker stop media_inspector
+```
+
+## Contribute with us!
+1. Fork it
+
+2. Download the development environment
+```
 >> docker pull quay.io/emigm/php-composer
+```
 
-Install Composer dependencies
-
+3. Install composer dependencies
+```
 >> docker run \
     -v $(pwd):/var/www quay.io/emigm/php-composer
     "composer install --prefer-dist"
+```
 
-Update Composer dependencies
-
+4. Check that everithing is working fine by running the unit tests
+```
 >> docker run \
-    -v $(pwd):/var/www quay.io/emigm/php-composer
-    "composer update"
-
-Run UnitTests
-
->> docker run \
-    -e TEST_INSTAGRAM_ACCESS_TOKEN=${YOUR_TOKEN} \
+    -e TEST_INSTAGRAM_ACCESS_TOKEN=$INSTAGRAM_ACCESS_TOKEN \
     -v $(pwd):/var/www quay.io/emigm/php-composer \
     "./vendor/bin/phpunit tests"
+```
 
-Run the service from the development environment
-
+5. Run Media Inspector from the development environment
+```
 >> docker run \
     -e GOOGLE_API_KEY=${YOUR_API_KEY} \
     -e GOOGLE_ENDPOINT=https://maps.googleapis.com \
@@ -38,23 +110,10 @@ Run the service from the development environment
     --name media_inspector_devenv \
     -v $(pwd):/var/www quay.io/emigm/php-composer
     "php -S 0.0.0.0:80"
+```
 
-Run the service from the released version
-
->> docker run \
-    -e GOOGLE_API_KEY=${YOUR_API_KEY} \
-    -e GOOGLE_ENDPOINT=https://maps.googleapis.com \
-    -e INSTAGRAM_ENDPOINT=https://api.instagram.com \
-    --name media_inspector \
-    quay.io/emigm/media-inspector
-
-Check if service is up and running
-
->> docker exec media_inspector ip addr show eth0
-${eth0-ipv4}
-
->> curl -XGET -H "Authorization: Bearer ${Instagram-Access-Token}" http://${eth0-ipv4}:80/media/{id}
-
-Stop service
-
->> docker stop ${container-id}
+Once you have passed through all the steps, start contributing!
+6. Create your feature branch: `git checkout -b my-new-feature`
+7. Commit your changes: `git commit -am 'Add some feature'`
+8. Push to the branch: `git push origin my-new-feature`
+9. Submit a pull request :D
