@@ -48,13 +48,18 @@ Media Inspector is customized through environment variables to create immutable 
 
 ### Using Media Inspector after installing it from source
 
+- Run Media Inspector service
 ```
 >> php -S localhost:8080
+```
+- Perform a HTTP request replacing those values that starts with "$" with the correct one
+```
+>> curl -XGET -H "Authorization: Bearer $INSTAGRAM_ACCESS_TOKEN" http://localhost:8080/media/$MEDIA_ID
 ```
 
 ### Using Media Inspector after installing Docker
 
-Run the Media Inspector container.
+Run the Media Inspector container
 ```
 >> docker run \
     -e GOOGLE_API_KEY=$YOUR_API_KEY \
@@ -73,35 +78,31 @@ To check that everithing is working fine, follow these steps:
 ```
 >> curl -XGET -H "Authorization: Bearer $INSTAGRAM_ACCESS_TOKEN" http://$CONTAINER_IP:80/media/$MEDIA_ID
 ```
-- Stop Media Inspector
+- Stop the Media Inspector container
 ```
 >> docker stop media_inspector
 ```
 
 ## Contribute with us!
-1. Fork it
-
-2. Download the development environment
+- Fork it
+- Download the development environment
 ```
 >> docker pull quay.io/emigm/php-composer
 ```
-
-3. Install composer dependencies
+- Install composer dependencies
 ```
 >> docker run \
     -v $(pwd):/var/www quay.io/emigm/php-composer
     "composer install --prefer-dist"
 ```
-
-4. Check that everithing is working fine by running the unit tests
+- Check that everithing is working fine by running the unit tests
 ```
 >> docker run \
     -e TEST_INSTAGRAM_ACCESS_TOKEN=$INSTAGRAM_ACCESS_TOKEN \
     -v $(pwd):/var/www quay.io/emigm/php-composer \
     "./vendor/bin/phpunit tests"
 ```
-
-5. Run Media Inspector from the development environment
+- Run Media Inspector from the development environment
 ```
 >> docker run \
     -e GOOGLE_API_KEY=${YOUR_API_KEY} \
@@ -113,7 +114,7 @@ To check that everithing is working fine, follow these steps:
 ```
 
 Once you have passed through all the steps, start contributing!
-6. Create your feature branch: `git checkout -b my-new-feature`
-7. Commit your changes: `git commit -am 'Add some feature'`
-8. Push to the branch: `git push origin my-new-feature`
-9. Submit a pull request :D
+- Create your feature branch: `git checkout -b my-new-feature`
+- Commit your changes: `git commit -am 'Add some feature'`
+- Push to the branch: `git push origin my-new-feature`
+- Submit a pull request :D
