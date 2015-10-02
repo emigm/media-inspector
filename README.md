@@ -4,7 +4,7 @@ Media Inspector is a PHP based web application that allow you to obtain informat
 
 ## Installation
 
-At Media Inspector we try to make your live easier. Due to that, we offer two way of installing it:
+At Media Inspector we try to make your life easier. Due to that, we offer two way of installing it:
 - Installing from Source
 - Installing through Docker
 
