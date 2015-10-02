@@ -4,7 +4,11 @@ namespace MediaInspector\RESTAdapter;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception as GuzzleException;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Middleware;
+use GuzzleHttp\MessageFormatter;
 use MediaInspector\Exception as MediaInspectorException;
+use Monolog\Logger;
 
 class RESTClient implements iRESTful 
 {
@@ -13,9 +17,17 @@ class RESTClient implements iRESTful
 
     function __construct($base_uri, $timeout = 3.0)
     {
+        $stack = HandlerStack::create();
+        $stack->push(
+            Middleware::log(new Logger('console'),
+                new MessageFormatter('{method} {uri} {req_headers} {req_body}')
+            )
+        );
+
         $this->client = new Client([
-            'base_uri' => $base_uri,
-            'timeout' => $timeout,
+            'base_uri'  => $base_uri,
+            'handler'   => $stack,
+            'timeout'   => $timeout,
         ]);
         $this->timeout = $timeout;
     }
