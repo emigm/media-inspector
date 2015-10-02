@@ -33,7 +33,7 @@ Finaly, install the application requirements
 >> composer install --prefer-dist
 ```
 
-### The Docker Way
+### Installing through Docker
 
 First of all, install [Docker](http://docs.docker.com/installation/)
 
