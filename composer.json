@@ -10,6 +10,9 @@
     "autoload" : {
         "psr-4" : {
             "MediaInspector\\":                 "src/MediaInspector/",
+            "MediaInspector\\Domain\\":         "src/MediaInspector/Domain/",
+            "MediaInspector\\Exception\\":      "src/MediaInspector/Exception/",
+            "MediaInspector\\Google\\":         "src/MediaInspector/Google/",
             "MediaInspector\\Instagram\\":      "src/MediaInspector/Instagram/",
             "MediaInspector\\RESTAdapter\\":    "src/MediaInspector/RESTAdapter/",
             "MediaInspector\\Utils\\":          "src/MediaInspector/Utils/",
