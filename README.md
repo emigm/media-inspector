@@ -46,6 +46,12 @@ Media Inspector is customized through environment variables to create immutable 
 
 ### Using Media Inspector after installing it from source
 
+- Define environment variables
+```
+export GOOGLE_API_KEY=$YOUR_API_KEY
+export GOOGLE_ENDPOINT=https://maps.googleapis.com
+export INSTAGRAM_ENDPOINT=https://api.instagram.com
+```
 - Run Media Inspector service
 ```
 >> php -S localhost:8080
