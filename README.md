@@ -26,7 +26,7 @@ Secondly, clone this repo into your working directory
 >> git clone https://github.com/emigm/media-inspector.git media_inspector
 ```
 
-Finaly, install the application requirements
+Finally, install the application requirements
 ```
 >> curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 >> cd media_inspector
@@ -35,9 +35,7 @@ Finaly, install the application requirements
 
 ### Installing through Docker
 
-First of all, install [Docker](http://docs.docker.com/installation/)
-
-That's it, this is all you need!
+Install [Docker](http://docs.docker.com/installation/) and **that's it**, this is all you need!
 
 There is a Docker image stored in [quay.io](https://quay.io/) with the latest version of Media Inspector.
 Also, a change in this respository triggers a new image build, so you will always run the latest version.
@@ -105,7 +103,7 @@ To check that everithing is working fine, follow these steps:
 - Run Media Inspector from the development environment
 ```
 >> docker run \
-    -e GOOGLE_API_KEY=${YOUR_API_KEY} \
+    -e GOOGLE_API_KEY=$YOUR_API_KEY \
     -e GOOGLE_ENDPOINT=https://maps.googleapis.com \
     -e INSTAGRAM_ENDPOINT=https://api.instagram.com \
     --name media_inspector_devenv \
