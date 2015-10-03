@@ -151,7 +151,7 @@ Run the Media Inspector container
 - Run Media Inspector from the development environment
 ```
 >> docker run \
-    -e GOOGLE_API_KEY=$YOUR_API_KEY \
+    -e GOOGLE_API_KEY=$API_KEY \
     -e GOOGLE_ENDPOINT=https://maps.googleapis.com \
     -e INSTAGRAM_ENDPOINT=https://api.instagram.com \
     --name media_inspector_devenv \
