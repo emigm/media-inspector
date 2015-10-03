@@ -138,7 +138,7 @@ Run the Media Inspector container
 - Install composer dependencies
 ```
 >> docker run \
-    -v $(pwd):/var/www quay.io/emigm/php-composer
+    -v $(pwd):/var/www quay.io/emigm/php-composer \
     "composer install --prefer-dist"
 ```
 - Check that everithing is working fine by running the unit tests
@@ -155,7 +155,8 @@ Run the Media Inspector container
     -e GOOGLE_ENDPOINT=https://maps.googleapis.com \
     -e INSTAGRAM_ENDPOINT=https://api.instagram.com \
     --name media_inspector_devenv \
-    -v $(pwd):/var/www quay.io/emigm/php-composer
+    -p 8080:80 \
+    -v $(pwd):/var/www quay.io/emigm/php-composer \
     "php -S 0.0.0.0:80"
 ```
 
