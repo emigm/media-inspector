@@ -40,6 +40,53 @@ Install [Docker](http://docs.docker.com/installation/) and **that's it**, this i
 There is a Docker image stored in [quay.io](https://quay.io/) with the latest version of Media Inspector.
 Also, a change in this respository triggers a new image build, so you will always run the latest version.
 
+## API
+
+Media Inspector's API is RESTful
+
+### Get information
+#### Request
+- **URI**
+```
+/media/$MEDIA_ID
+```
+- **Method**
+```
+GET
+```
+- **Headers**
+```
+Authorizaion: Bearer $INSTAGRAM_ACCESS_TOKEN
+```
+#### Response
+- **Status Code**
+```
+200 OK
+```
+- **Body**
+```
+{
+    "id": "1081347983064313090_1220832186",
+    "type": "image",
+    "location": {
+        "geoPoint": {
+            "latitude": 40.7155418,
+            "longitude": -73.9533691
+        },
+        "reverseGeoCode": {
+            "streetAddress": "33 Havemeyer St, Brooklyn, NY 11211, USA",
+            "neighborhood": "Williamsburg",
+            "subLocality": "Brooklyn",
+            "locality": "NY",
+            "postalCode": "11211",
+            "adminArea1": "Kings County",
+            "adminArea2": "NY",
+            "country": "US"
+        }
+    }
+}
+```
+
 ## Usage
 
 Media Inspector is customized through environment variables to create immutable artifacts that can be run in any environment
