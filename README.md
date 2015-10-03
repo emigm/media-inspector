@@ -48,7 +48,7 @@ Media Inspector is customized through environment variables to create immutable 
 
 - Define environment variables
 ```
-export GOOGLE_API_KEY=$GOOGLE_API_KEY
+export GOOGLE_API_KEY=$API_KEY
 export GOOGLE_ENDPOINT=https://maps.googleapis.com
 export INSTAGRAM_ENDPOINT=https://api.instagram.com
 ```
@@ -66,7 +66,7 @@ export INSTAGRAM_ENDPOINT=https://api.instagram.com
 Run the Media Inspector container
 ```
 >> docker run \
-    -e GOOGLE_API_KEY=$GOOGLE_API_KEY \
+    -e GOOGLE_API_KEY=$API_KEY \
     -e GOOGLE_ENDPOINT=https://maps.googleapis.com \
     -e INSTAGRAM_ENDPOINT=https://api.instagram.com \
     --name media_inspector \
