@@ -103,7 +103,7 @@ export INSTAGRAM_ENDPOINT=https://api.instagram.com
 ```
 >> php -S localhost:8080
 ```
-- Perform a HTTP request replacing those values that starts with "$" with the correct one
+- Perform a HTTP request replacing those values that start with "$" with the correct one
 ```
 >> curl -XGET -H "Authorization: Bearer $INSTAGRAM_ACCESS_TOKEN" http://localhost:8080/media/$MEDIA_ID
 ```
