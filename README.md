@@ -1,6 +1,6 @@
 # Media Inspector
 
-Media Inspector is a PHP based web application that allow you to obtain information about a media entity uploaded to a social network
+Media Inspector is a PHP based web application that allows you to obtain information about a media entity uploaded to a social network
 
 ## Installation
 
