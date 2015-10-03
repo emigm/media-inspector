@@ -70,17 +70,12 @@ Run the Media Inspector container
     -e GOOGLE_ENDPOINT=https://maps.googleapis.com \
     -e INSTAGRAM_ENDPOINT=https://api.instagram.com \
     --name media_inspector \
+    -p 8080:80 \
     quay.io/emigm/media-inspector
-```
-
-To check that everithing is working fine, follow these steps:
-- Get the container IP address. It will be used to perform an HTTP request to it 
-```
->> docker exec media_inspector ip addr show eth0
 ```
 - Perform a HTTP request replacing those values that starts with "$" with the correct one
 ```
->> curl -XGET -H "Authorization: Bearer $INSTAGRAM_ACCESS_TOKEN" http://$CONTAINER_IP:80/media/$MEDIA_ID
+>> curl -XGET -H "Authorization: Bearer $INSTAGRAM_ACCESS_TOKEN" http://localhost:8080/media/$MEDIA_ID
 ```
 - Stop the Media Inspector container
 ```
