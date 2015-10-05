@@ -95,9 +95,9 @@ Media Inspector is customized through environment variables to create immutable 
 
 - Define environment variables
 ```
-export GOOGLE_API_KEY=$API_KEY
-export GOOGLE_ENDPOINT=https://maps.googleapis.com
-export INSTAGRAM_ENDPOINT=https://api.instagram.com
+>> export GOOGLE_API_KEY=$API_KEY
+>> export GOOGLE_ENDPOINT=https://maps.googleapis.com
+>> export INSTAGRAM_ENDPOINT=https://api.instagram.com
 ```
 - Run Media Inspector service
 ```
