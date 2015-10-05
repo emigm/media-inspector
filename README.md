@@ -103,7 +103,7 @@ Media Inspector is customized through environment variables to create immutable 
 ```
 >> php -S localhost:8080
 ```
-- Perform a HTTP request replacing those values that start with "$" with the correct one
+- Perform a HTTP request replacing those values that start with "$" with the correct ones
 ```
 >> curl -XGET -H "Authorization: Bearer $INSTAGRAM_ACCESS_TOKEN" http://localhost:8080/media/$MEDIA_ID
 ```
@@ -120,7 +120,7 @@ Run the Media Inspector container
     -p 8080:80 \
     quay.io/emigm/media-inspector
 ```
-- Perform a HTTP request replacing those values that starts with "$" with the correct one
+- Perform a HTTP request replacing those values that starts with "$" with the correct ones
 ```
 >> curl -XGET -H "Authorization: Bearer $INSTAGRAM_ACCESS_TOKEN" http://localhost:8080/media/$MEDIA_ID
 ```
