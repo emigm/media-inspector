@@ -3,11 +3,12 @@
 namespace MediaInspector;
 
 use MediaInspector\Exception;
+use Sylex
 use Symfony\Component\HttpFoundation\Request;
 
 require_once __DIR__.'/vendor/autoload.php'; 
 
-$app = new \Silex\Application(); 
+$app = new Silex\Application(); 
 $app->get('/media/{id}', function($id, Request $request) use($app) {
     try {
         $authorization_header = $request->headers->get('Authorization');
