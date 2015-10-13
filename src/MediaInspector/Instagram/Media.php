@@ -8,7 +8,6 @@ class Media
 {
     private $id = NULL;
     private $geo_point = NULL;
-    private $name = NULL;
     private $type = NULL;
 
     public function __construct($id, $type, Utils\GeoPoint $geo_point = NULL)
