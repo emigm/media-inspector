@@ -81,13 +81,11 @@ class RESTClient implements iRESTful
         try {
             $response = $this->client->request($method, $uri, $options);
         } catch (GuzzleException\ClientException $ex) {
-            $request = $ex->getRequest();
             $response = $ex->getResponse();
 
             throw new MediaInspectorException\ClientException(
                 $response->getBody(), $response->getStatusCode(), $ex);
         } catch (GuzzleException\ServerException $ex) {
-            $request = $ex->getRequest();
             $response = $ex->getResponse();
 
             throw new MediaInspectorException\ServerException(
