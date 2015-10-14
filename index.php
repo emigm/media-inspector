@@ -10,7 +10,11 @@ use Symfony\Component\HttpFoundation\Request;
 
 $app = new \Silex\Application();
 
-$app->get('/media/{id}', function($id, Request $request) use($app) {
+$app->get('/media/', function() use($app) {
+    return $app->json(['error' => 'Invalid Request'], 400);
+});
+
+$app->get('/media/{id}/', function($id, Request $request) use($app) {
     try {
         $authorization_header = $request->headers->get('Authorization');
 
