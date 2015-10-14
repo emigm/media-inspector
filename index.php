@@ -3,7 +3,7 @@
 namespace MediaInspector;
 
 use MediaInspector\Exception;
-use Sylex
+use Sylex;
 use Symfony\Component\HttpFoundation\Request;
 
 require_once __DIR__.'/vendor/autoload.php'; 
