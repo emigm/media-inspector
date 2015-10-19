@@ -4,7 +4,6 @@ namespace WebApp\Controllers;
 
 use MediaInspector;
 use MediaInspector\Exception;
-// use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 
 
