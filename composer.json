@@ -16,7 +16,8 @@
             "MediaInspector\\Instagram\\":      "src/MediaInspector/Instagram/",
             "MediaInspector\\RESTAdapter\\":    "src/MediaInspector/RESTAdapter/",
             "MediaInspector\\Utils\\":          "src/MediaInspector/Utils/",
-            "MediaInspector\\UnitTests\\":      "tests/unit_tests/"
+            "MediaInspector\\UnitTests\\":      "tests/unit_tests/",
+            "WebApp\\Controllers\\":            "src/WebApp/Controllers/"
         }
     }
 }
