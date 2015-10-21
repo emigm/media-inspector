@@ -1,0 +1,11 @@
+# config/routes.yml
+
+media:
+  path: /media/
+  defaults:
+    _controller: 'WebApp\Controller\MediaController::getAllMedia'
+
+media.id:
+  path: /media/{id}/
+  defaults:
+    _controller: 'WebApp\Controller\MediaController::getMediaById'

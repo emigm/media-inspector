@@ -1,39 +1,22 @@
 <?php
 
-namespace MediaInspector;
-
 require_once __DIR__.'/vendor/autoload.php'; 
 
-use MediaInspector\Exception;
-use \Silex;
-use Symfony\Component\HttpFoundation\Request;
+use Silex\Application;
 
-$app = new \Silex\Application();
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\Routing\Loader\YamlFileLoader;
+use Symfony\Component\Routing\RouteCollection;
 
-$app->get('/media/', function() use($app) {
-    return $app->json(['error' => 'Invalid Request'], 400);
+$app = new Application();
+
+$app['routes'] = $app->extend(
+    'routes', function (RouteCollection $routes, Application $app) {
+        $loader = new YamlFileLoader(new FileLocator(__DIR__.'/config'));
+        $collection = $loader->load('routes.yml');
+        $routes->addCollection($collection);
+ 
+        return $routes;
 });
-
-$app->get('/media/{id}/', function($id, Request $request) use($app) {
-    try {
-        $authorization_header = $request->headers->get('Authorization');
-
-        if (strpos($authorization_header, 'Bearer') === false and
-            strpos($authorization_header, 'bearer') === false ) {
-            return $app->json(['error' => 'Invalid Token'], 401);
-        }
-
-        $access_token = substr($authorization_header, strlen('bearer '));
-
-        $media_inspector = MediaInspectorFactory::create($access_token);
-        $media_info = $media_inspector->getMediaInfo($id);
-    } catch (Exception\ClientException $ex) {
-        return $app->json(['error' => $ex->getMessage()], 400);
-    } catch(\Exception $ex) {
-        return $app->json(['error' => $ex->getMessage()], 500);
-    }
-
-    return $app->json($media_info->toArray(), 200); 
-}); 
 
 $app->run();
