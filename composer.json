@@ -2,7 +2,9 @@
     "require": {
         "guzzlehttp/guzzle": "~6.0",
         "monolog/monolog": "*",
-        "silex/silex": "~1.3"
+        "silex/silex": "~1.3",
+        "symfony/yaml": "~2.7",
+        "symfony/config": "~2.7"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.8"
@@ -17,7 +19,7 @@
             "MediaInspector\\RESTAdapter\\":    "src/MediaInspector/RESTAdapter/",
             "MediaInspector\\Utils\\":          "src/MediaInspector/Utils/",
             "MediaInspector\\UnitTests\\":      "tests/unit_tests/",
-            "WebApp\\Controllers\\":            "src/WebApp/Controllers/"
+            "WebApp\\Controller\\":             "src/WebApp/Controller/"
         }
     }
 }

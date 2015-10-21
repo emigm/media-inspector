@@ -3,19 +3,20 @@
 require_once __DIR__.'/vendor/autoload.php'; 
 
 use Silex\Application;
-use Silex\Provider;
-use Symfony\Component\HttpFoundation\Request;
-use WebApp\Controllers;
+
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\Routing\Loader\YamlFileLoader;
+use Symfony\Component\Routing\RouteCollection;
 
 $app = new Application();
 
-$app->register(new Provider\ServiceControllerServiceProvider());
-
-$app['media.controller'] = $app->share(function() use ($app) {
-    return new Controllers\MediaController($app);
+$app['routes'] = $app->extend(
+    'routes', function (RouteCollection $routes, Application $app) {
+        $loader = new YamlFileLoader(new FileLocator(__DIR__.'/config'));
+        $collection = $loader->load('routes.yml');
+        $routes->addCollection($collection);
+ 
+        return $routes;
 });
-
-$app->get('/media/', "media.controller:getAllMedia");
-$app->get('/media/{id}/', "media.controller:getMediaById");
 
 $app->run();
