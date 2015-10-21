@@ -1,18 +1,12 @@
-FROM alpine:latest
+FROM php:5.6
 
 MAINTAINER Emiliano G. Molina <emiliano.g.molina@gmail.com>
 
 # Install system packages
-RUN apk --update add \
-    wget \
+RUN apt-get update && apt-get install -y \
     curl \
     git \
-    php \
-    php-curl \
-    php-openssl \
-    php-json \
-    php-phar \
-    php-dom
+    wget
 
 # Install PHP composer 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -23,6 +17,9 @@ WORKDIR /var/www
 
 # Deploy application
 COPY . /var/www
+
+# Configuring application
+RUN echo "date.timezone = America/Argentina/Buenos_Aires" > /usr/local/etc/php/php.ini
 
 # Install application dependencies
 RUN composer install --prefer-dist
