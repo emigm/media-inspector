@@ -18,8 +18,11 @@ WORKDIR /var/www
 # Deploy application
 COPY . /var/www
 
+# Configuring application
+RUN echo "date.timezone = America/Argentina/Buenos_Aires" > /usr/local/etc/php/php.ini
+
 # Create mount point
 VOLUME /var/www
 
 ENTRYPOINT ["/bin/sh", "-c"]
-CMD ["echo"]
+CMD ["php", "-i"]
