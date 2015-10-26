@@ -1,0 +1,11 @@
+{
+    "meta": {
+        "code": 200
+    },
+    "data": {
+        "latitude": 40.714139679,
+        "id": "614396723",
+        "longitude": -73.961486234,
+        "name": "Rosamunde Sausage Grill - Brooklyn"
+    }
+}
