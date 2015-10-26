@@ -30,12 +30,11 @@ class RESTClientTest extends \PHPUnit_Framework_TestCase
 
     public function testGet()
     {
-        $MOCK_STATUS = 200;
-        $MOCK_HEADERS = ['Content-Type' => 'application/json; charset=UTF-8'];
-        $MOCK_BODY = $stream = Psr7\stream_for(
-            fopen(__DIR__.'/mocks/rest_client_200_OK.txt', 'r'));
-
-        $MOCK_RESPONSE = new Response($MOCK_STATUS, $MOCK_HEADERS, $MOCK_BODY);
+        $MOCK_RESPONSE = new Response(
+            200,
+            ['Content-Type' => 'application/json; charset=UTF-8'],
+            $stream = Psr7\stream_for(
+                fopen(__DIR__.'/mocks/rest_client_200_OK.txt', 'r')));
 
         $client = new RESTAdapter\RESTClient(
             'https://api.instagram.com', new MockHandler([$MOCK_RESPONSE]));
@@ -55,18 +54,15 @@ class RESTClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetClientError()
     {
-        $MOCK_STATUS = 400;
-        $MOCK_HEADERS = ['Content-Type' => 'application/json; charset=UTF-8'];
-        $MOCK_BODY = $stream = Psr7\stream_for(
-            fopen(__DIR__.'/mocks/rest_client_bad_request.txt', 'r'));
-
         $MOCK_RESPONSE = new Response(
-            $MOCK_STATUS, $MOCK_HEADERS, $MOCK_BODY);
+            400, 
+            ['Content-Type' => 'application/json; charset=UTF-8'],
+            Psr7\stream_for(
+                fopen(__DIR__.'/mocks/rest_client_bad_request.txt', 'r')));
 
         $INVALID_URI = '/v1/invalid/614396723';
         $QUERY = ['access_token' => $access_token];
         $HEADERS = ['Accept' => 'application/json'];
-        $TIMEOUT = 3.0;
 
         $MOCK_REQUEST = new Request('GET', $INVALID_URI, $HEADERS);
 
@@ -77,7 +73,7 @@ class RESTClientTest extends \PHPUnit_Framework_TestCase
             ])
         );
 
-        $response = $client->get($INVALID_URI, $QUERY);
+        $response = $client->get($INVALID_URI, $QUERY, $HEADERS);
     }
 
     /**
