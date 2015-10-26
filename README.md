@@ -144,7 +144,6 @@ Run the Media Inspector container
 - Check that everithing is working fine by running the unit tests
 ```
 >> docker run \
-    -e TEST_INSTAGRAM_ACCESS_TOKEN=$INSTAGRAM_ACCESS_TOKEN \
     -v $(pwd):/var/www quay.io/emigm/php-composer \
     "./vendor/bin/phpunit tests"
 ```
