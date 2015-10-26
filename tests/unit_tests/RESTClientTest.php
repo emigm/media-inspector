@@ -2,6 +2,10 @@
 
 namespace MediaInspector\UnitTests;
 
+use GuzzleHttp\EntityBody;
+use GuzzleHttp\Handler\MockHandler;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Psr7\Response;
 use MediaInspector\RESTAdapter;
 
 class RESTClientTest extends \PHPUnit_Framework_TestCase
@@ -23,19 +27,30 @@ class RESTClientTest extends \PHPUnit_Framework_TestCase
 
     public function testGet()
     {
-        $access_token = getenv('TEST_INSTAGRAM_ACCESS_TOKEN');
-        $client = new RESTAdapter\RESTClient('https://api.instagram.com');
+        $STATUS = 200;
+        $HEADERS = ['Content-Type' => 'application/json; charset=UTF-8'];
+
+        // $body = fopen('/mocks/to/file', 'r');
+        // $r = $client->request('POST', 'http://httpbin.org/post', ['body' => $body]);
+
+        // $BODY = EntityBody::factory(fopen('/path/to/file.txt', 'r+'));
+        $BODY = "{\"meta\":{\"code\":200},\"data\":{\"latitude\":40.714139679,\"id\":\"614396723\",\"longitude\":-73.961486234,\"name\":\"Rosamunde Sausage Grill - Brooklyn\"}}";
+        $PROTOCOL = '1.1';
+        $RESPONSE = new Response($STATUS, $HEADERS, $BODY, $PROTOCOL);
+
+        $mock_handler = new MockHandler([$RESPONSE]);
+        $client = new RESTAdapter\RESTClient(
+            'https://api.instagram.com', $mock_handler);
 
         $URI = '/v1/locations/614396723';
         $QUERY = ['access_token' => $access_token];
         $HEADERS = ['Accept' => 'application/json'];
         $TIMEOUT = 3.0;
 
-        $RESPONSE = "{\"meta\":{\"code\":200},\"data\":{\"latitude\":40.714139679,\"id\":\"614396723\",\"longitude\":-73.961486234,\"name\":\"Rosamunde Sausage Grill - Brooklyn\"}}";
+        $response_body = $client->get($URI, $QUERY, $HEADERS, $TIMEOUT);
 
-        $response = $client->get($URI, $QUERY, $HEADERS, $TIMEOUT);
-
-        $this->assertEquals($RESPONSE, (string) $response);
+        $this->assertEquals($RESPONSE->getStatusCode(), $STATUS);
+        $this->assertEquals($RESPONSE->getBody(), $response_body);
     }
 
     /**

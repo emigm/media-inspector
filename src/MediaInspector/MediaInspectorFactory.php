@@ -2,9 +2,13 @@
 
 namespace MediaInspector;
 
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\MessageFormatter;
+use GuzzleHttp\Middleware;
 use MediaInspector\Google;
 use MediaInspector\Instagram;
 use MediaInspector\RESTAdapter;
+use Monolog\Logger;
 
 class MediaInspectorFactory
 {
@@ -16,7 +20,15 @@ class MediaInspectorFactory
             throw new \Exception("Google is not configured");
         }
 
-        $google_rest_client = new RESTAdapter\RESTClient($google_end_point);
+        $handler = HandlerStack::create();
+        $handler->push(
+            Middleware::log(new Logger('console'),
+                new MessageFormatter('{method} {uri} {req_headers} {req_body}')
+            )
+        );
+
+        $google_rest_client = new RESTAdapter\RESTClient(
+            $google_end_point, $handler);
         $google_maps = new Google\Maps($google_api_key, $google_rest_client);
 
         $instagram_end_point = getenv('INSTAGRAM_ENDPOINT');
@@ -25,7 +37,7 @@ class MediaInspectorFactory
         }
 
         $instagram_rest_client = new RESTAdapter\RESTClient(
-            $instagram_end_point);
+            $instagram_end_point, $handler);
         $instagram_media_endpoint = new Instagram\MediaEndPoint(
             $access_token, $instagram_rest_client);
 
