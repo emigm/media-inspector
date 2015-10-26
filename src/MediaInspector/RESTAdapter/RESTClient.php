@@ -3,8 +3,6 @@
 namespace MediaInspector\RESTAdapter;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception as GuzzleException;
-use MediaInspector\Exception as MediaInspectorException;
 
 class RESTClient implements iRESTful 
 {
@@ -29,9 +27,8 @@ class RESTClient implements iRESTful
     public function get($uri, $query = NULL, $headers = NULL, $timeout = NULL)
     {
         $response = $this->request('GET', $uri, $query, $headers, NULL, $timeout);
-        $body = $response->getBody();
 
-        return $body;
+        return $response;
     }
 
     public function put($uri, $query = NULL, $headers = NULL, $body = NULL, $timeout = NULL)
@@ -48,6 +45,7 @@ class RESTClient implements iRESTful
     {
         $options = [
             'connect_timeout' => 5.0,
+            'http_errors' => false,
         ];
 
         if (!is_null($query)) {
@@ -67,19 +65,7 @@ class RESTClient implements iRESTful
             $current_timeout = $timeout;
         }
 
-        try {
-            $response = $this->client->request($method, $uri, $options);
-        } catch (GuzzleException\ClientException $ex) {
-            $response = $ex->getResponse();
-
-            throw new MediaInspectorException\ClientException(
-                $response->getBody(), $response->getStatusCode(), $ex);
-        } catch (GuzzleException\ServerException $ex) {
-            $response = $ex->getResponse();
-
-            throw new MediaInspectorException\ServerException(
-                $response->getBody(), $response->getStatusCode(), $ex);
-        }
+        $response = $this->client->request($method, $uri, $options);
 
         return $response;
     }

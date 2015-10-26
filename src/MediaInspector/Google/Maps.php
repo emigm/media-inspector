@@ -26,9 +26,21 @@ class Maps implements Domain\iReverseGeoCode
         $query = ['latlng' => $lat_lng, 'key' => $this->api_key];
 
         $response = $this->rest_client->get($uri, $query);
-        $decoded_response = json_decode($response, true);
 
-        $reverse_geo_code = $this->responseToReverseGeoCode($decoded_response);
+        switch ($response->getStatusCode()) {
+            case 200:
+                return $this->responseToReverseGeoCode($response);
+                break;
+            case 400:
+                $this->responseToClientException($response);
+                break;
+            case 500:
+                $this->responseToServerException($response);
+                break;
+            default:
+                $this->responseToServerException($response);
+                break;
+        }
 
         return $reverse_geo_code;
     }
@@ -44,7 +56,9 @@ class Maps implements Domain\iReverseGeoCode
         $admin_area_1 = NULL;
         $country = NULL;
 
-        foreach ($response['results'] as $result) {
+        $decoded_body = json_decode($response->getBody(), true);
+
+        foreach ($decoded_body['results'] as $result) {
             $types = $result['types'];
 
             if(in_array('street_address', $types)) {
@@ -71,5 +85,17 @@ class Maps implements Domain\iReverseGeoCode
             $postal_code, $admin_area_2, $admin_area_1, $country);
 
         return $reverse_geo_code;
+    }
+
+    private function responseToClientException($response)
+    {
+        throw new Exception\ClientException(
+            'Invalid request', $response->getStatusCode());
+    }
+
+    private function responseToServerException($response)
+    {
+        throw new Exception\ServerException(
+            'Something went wrong', $response->getStatusCode());
     }
 }
