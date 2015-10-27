@@ -2,9 +2,9 @@
 
 namespace MediaInspector\Domain;
 
-use MediaInspector\Utils;
+use MediaInspector\Domain;
 
 interface iReverseGeoCode
 {
-    public function getReverseGeoCode(Utils\GeoPoint $location);
+    public function getReverseGeoCode(Domain\GeoPoint $location);
 }

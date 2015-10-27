@@ -2,7 +2,7 @@
 
 namespace MediaInspector\Domain;
 
-use MediaInspector\Utils;
+use MediaInspector\Domain;
 
 class MediaInfo 
 {
@@ -13,7 +13,7 @@ class MediaInfo
     private $type = NULL;
 
     public function __construct(
-        $id, $type, Utils\GeoPoint $geo_point = NULL,Utils\ReverseGeoCode $reverse_geo_code = NULL)
+        $id, $type, Domain\GeoPoint $geo_point = NULL, Domain\ReverseGeoCode $reverse_geo_code = NULL)
     {
         $this->id = $id;
         $this->name = NULL; // TODO: Add media name

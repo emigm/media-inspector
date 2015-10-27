@@ -19,7 +19,7 @@ WORKDIR /var/www
 COPY . /var/www
 
 # Configuring application
-RUN echo "date.timezone = America/Argentina/Buenos_Aires" > /usr/local/etc/php/php.ini
+COPY ./config/php.ini /usr/local/etc/php/php.ini
 
 # Install application dependencies
 RUN composer install --prefer-dist
