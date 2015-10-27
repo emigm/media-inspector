@@ -19,11 +19,10 @@ class RESTClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testPost()
     {
-        $access_token = getenv('TEST_INSTAGRAM_ACCESS_TOKEN');
         $client = new RESTAdapter\RESTClient('https://api.instagram.com');
 
         $URI = '/v1/locations/614396723';
-        $QUERY = ['access_token' => $access_token];
+        $QUERY = ['access_token' => 'accessToken123'];
 
         $response = $client->post($URI, $QUERY);
     }
@@ -40,40 +39,35 @@ class RESTClientTest extends \PHPUnit_Framework_TestCase
             'https://api.instagram.com', new MockHandler([$MOCK_RESPONSE]));
 
         $URI = '/v1/locations/614396723';
-        $QUERY = ['access_token' => $access_token];
+        $QUERY = ['access_token' => 'accessToken123'];
         $HEADERS = ['Accept' => 'application/json'];
         $TIMEOUT = 3.0;
 
         $response_body = $client->get($URI, $QUERY, $HEADERS, $TIMEOUT);
 
-        $this->assertEquals($MOCK_RESPONSE->getBody(), $response_body);
+        $this->assertEquals($MOCK_RESPONSE->getStatusCode(), 200);
+        $this->assertEquals($MOCK_RESPONSE->getBody(), $response_body->getBody());
     }
 
-    /**
-     * @expectedException MediaInspector\Exception\ClientException
-     */
     public function testGetClientError()
     {
         $MOCK_RESPONSE = new Response(
             400, 
             ['Content-Type' => 'application/json; charset=UTF-8'],
             Psr7\stream_for(
-                fopen(__DIR__.'/mocks/rest_client_bad_request.txt', 'r')));
-
-        $INVALID_URI = '/v1/invalid/614396723';
-        $QUERY = ['access_token' => $access_token];
-        $HEADERS = ['Accept' => 'application/json'];
-
-        $MOCK_REQUEST = new Request('GET', $INVALID_URI, $HEADERS);
+                fopen(__DIR__.'/mocks/rest_client_400_Bad_Request.txt', 'r')));
 
         $client = new RESTAdapter\RESTClient(
-            'https://api.instagram.com', new MockHandler([
-                new GuzzleException\ClientException(
-                    'Exception', $MOCK_REQUEST, $MOCK_RESPONSE)
-            ])
-        );
+            'https://api.instagram.com', new MockHandler([$MOCK_RESPONSE]));
 
-        $response = $client->get($INVALID_URI, $QUERY, $HEADERS);
+        $INVALID_URI = '/v1/location/614396723';
+        $QUERY = ['access_token' => 'accessToken123'];
+        $HEADERS = ['Accept' => 'application/json'];
+
+        $response_body = $client->get($INVALID_URI, $QUERY, $HEADERS);
+
+        $this->assertEquals($MOCK_RESPONSE->getStatusCode(), 400);
+        $this->assertEquals($MOCK_RESPONSE->getBody(), $response_body->getBody());
     }
 
     /**
@@ -82,11 +76,10 @@ class RESTClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testPut()
     {
-        $access_token = getenv('TEST_INSTAGRAM_ACCESS_TOKEN');
         $client = new RESTAdapter\RESTClient('https://api.instagram.com');
 
         $URI = '/v1/locations/614396723';
-        $QUERY = ['access_token' => $access_token];
+        $QUERY = ['access_token' => 'accessToken123'];
 
         $response = $client->put($URI, $QUERY);
     }
@@ -97,11 +90,10 @@ class RESTClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testDelete()
     {
-        $access_token = getenv('TEST_INSTAGRAM_ACCESS_TOKEN');
         $client = new RESTAdapter\RESTClient('https://api.instagram.com');
 
         $URI = '/v1/locations/614396723';
-        $QUERY = ['access_token' => $access_token];
+        $QUERY = ['access_token' => 'accessToken123'];
 
         $response = $client->delete($URI, $QUERY);
     }

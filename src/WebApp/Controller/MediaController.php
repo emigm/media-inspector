@@ -22,7 +22,7 @@ class MediaController
 
             if (strpos($authorization_header, 'Bearer') === false and
                 strpos($authorization_header, 'bearer') === false ) {
-                return $app->json(['error' => 'Invalid Token'], 401);
+                throw new Exception\UnauthorizedException('Invalid access token');
             }
 
             $access_token = substr($authorization_header, strlen('bearer '));
@@ -30,6 +30,8 @@ class MediaController
             $media_inspector = MediaInspector\MediaInspectorFactory::create(
                 $access_token);
             $media_info = $media_inspector->getMediaInfo($id);
+        } catch (Exception\UnauthorizedException $ex) {
+            return $app->json(['error' => $ex->getMessage()], 401);
         } catch (Exception\ClientException $ex) {
             return $app->json(['error' => $ex->getMessage()], 400);
         } catch(\Exception $ex) {
