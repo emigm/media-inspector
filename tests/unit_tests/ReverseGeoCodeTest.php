@@ -2,7 +2,7 @@
 
 namespace MediaInspector\UnitTests;
 
-use MediaInspector\Utils;
+use MediaInspector\Domain;
 
 class ReverseGeoCodeTest extends \PHPUnit_Framework_TestCase
 {
@@ -17,7 +17,7 @@ class ReverseGeoCodeTest extends \PHPUnit_Framework_TestCase
         $ADMIN_AREA_1 = 'NY';
         $COUNTRY = 'US';
 
-        $reverse_geo_code = new Utils\ReverseGeoCode(
+        $reverse_geo_code = new Domain\ReverseGeoCode(
             $STREET_ADDRESS, $NEIGHBORHOOD, $SUB_LOCALITY, $LOCALITY,
             $POSTAL_CODE, $ADMIN_AREA_2, $ADMIN_AREA_1, $COUNTRY);
 

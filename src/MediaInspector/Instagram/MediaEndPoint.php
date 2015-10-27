@@ -6,7 +6,6 @@ use GuzzleHttp\Exception as GuzzleException;
 use MediaInspector\Domain;
 use MediaInspector\Exception;
 use MediaInspector\RESTAdapter;
-use MediaInspector\Utils;
 use MediaInspector\Exception as MediaInspectorException;
 
 class MediaEndPoint implements Domain\iMedia
@@ -56,7 +55,7 @@ class MediaEndPoint implements Domain\iMedia
             $decoded_body['data']['location']['latitude'] : NULL;
         $longitude = (isset($decoded_body['data']['location'])) ?
             $decoded_body['data']['location']['longitude'] : NULL;
-        $geo_point = new Utils\GeoPoint($latitude, $longitude);
+        $geo_point = new Domain\GeoPoint($latitude, $longitude);
 
         $media = new Media($id, $type, $geo_point);
 

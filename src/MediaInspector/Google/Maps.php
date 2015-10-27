@@ -5,7 +5,6 @@ namespace MediaInspector\Google;
 use MediaInspector\Domain;
 use MediaInspector\Exception;
 use MediaInspector\RESTAdapter;
-use MediaInspector\Utils;
 
 class Maps implements Domain\iReverseGeoCode
 {
@@ -19,7 +18,7 @@ class Maps implements Domain\iReverseGeoCode
         $this->rest_client = $rest_client;
     }
 
-    public function getReverseGeoCode(Utils\GeoPoint $geo_point)
+    public function getReverseGeoCode(Domain\GeoPoint $geo_point)
     {
         $uri = self::GEOCODE_URI;
         $lat_lng = $geo_point->getLatitude().','.$geo_point->getLongitude();
@@ -80,7 +79,7 @@ class Maps implements Domain\iReverseGeoCode
             }
         }
 
-        $reverse_geo_code = new Utils\ReverseGeoCode(
+        $reverse_geo_code = new Domain\ReverseGeoCode(
             $street_address, $neighborhood, $sub_locality, $locality,
             $postal_code, $admin_area_2, $admin_area_1, $country);
 

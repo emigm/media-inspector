@@ -2,7 +2,7 @@
 
 namespace MediaInspector\UnitTests;
 
-use MediaInspector\Utils;
+use MediaInspector\Domain;
 
 class GeoPointTest extends \PHPUnit_Framework_TestCase
 {
@@ -11,7 +11,7 @@ class GeoPointTest extends \PHPUnit_Framework_TestCase
         $LATITUDE = 40.733497;
         $LONGITUDE = -74.058645;
 
-        $geo_point = new Utils\GeoPoint($LATITUDE, $LONGITUDE);
+        $geo_point = new Domain\GeoPoint($LATITUDE, $LONGITUDE);
 
         $this->assertEquals($geo_point->getLatitude(), $LATITUDE);
         $this->assertEquals($geo_point->getLongitude(), $LONGITUDE);
@@ -26,7 +26,7 @@ class GeoPointTest extends \PHPUnit_Framework_TestCase
         $LATITUDE = 91.0;
         $LONGITUDE = -74.058645;
 
-        $geo_point = new Utils\GeoPoint($LATITUDE, $LONGITUDE);
+        $geo_point = new Domain\GeoPoint($LATITUDE, $LONGITUDE);
     }
 
     /**
@@ -38,7 +38,7 @@ class GeoPointTest extends \PHPUnit_Framework_TestCase
         $LATITUDE = 91.0;
         $LONGITUDE = -74.058645;
 
-        $geo_point = new Utils\GeoPoint($LATITUDE, $LONGITUDE);
+        $geo_point = new Domain\GeoPoint($LATITUDE, $LONGITUDE);
     }
 
 }

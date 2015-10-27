@@ -2,7 +2,7 @@
 
 namespace MediaInspector\Instagram;
 
-use MediaInspector\Utils;
+use MediaInspector\Domain;
 
 class Media
 {
@@ -10,7 +10,7 @@ class Media
     private $geo_point = NULL;
     private $type = NULL;
 
-    public function __construct($id, $type, Utils\GeoPoint $geo_point = NULL)
+    public function __construct($id, $type, Domain\GeoPoint $geo_point = NULL)
     {
         $this->id = $id;
         $this->type = $type;
