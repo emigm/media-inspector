@@ -5,7 +5,7 @@ namespace MediaInspector\UnitTests;
 use GuzzleHttp\Psr7;
 use GuzzleHttp\Psr7\Response;
 use MediaInspector\Google;
-use MediaInspector\Utils;
+use MediaInspector\Domain;
 
 class MapsTest extends \PHPUnit_Framework_TestCase
 {
@@ -27,10 +27,10 @@ class MapsTest extends \PHPUnit_Framework_TestCase
         $API_KEY = 'api.key.123';
         $maps = new Google\Maps($API_KEY, $rest_client_stub);
 
-        $GEO_POINT = new Utils\GeoPoint('40.7155418', '-73.9533691');
+        $GEO_POINT = new Domain\GeoPoint('40.7155418', '-73.9533691');
         $reverse_geo_code = $maps->getReverseGeoCode($GEO_POINT);
 
-        $expected_reverse_geo_code = new Utils\ReverseGeoCode(
+        $expected_reverse_geo_code = new Domain\ReverseGeoCode(
             '277 Bedford Ave, Brooklyn, NY 11211, USA', 'Williamsburg',
             'Brooklyn', 'NY', '11211', 'Kings County', 'NY', 'US');
 
@@ -55,10 +55,10 @@ class MapsTest extends \PHPUnit_Framework_TestCase
         $API_KEY = 'api.key.123';
         $maps = new Google\Maps($API_KEY, $rest_client_stub);
 
-        $GEO_POINT = new Utils\GeoPoint('40.7155418', '-73.9533691');
+        $GEO_POINT = new Domain\GeoPoint('40.7155418', '-73.9533691');
         $reverse_geo_code = $maps->getReverseGeoCode($GEO_POINT);
 
-        $expected_reverse_geo_code = new Utils\ReverseGeoCode(
+        $expected_reverse_geo_code = new Domain\ReverseGeoCode(
             NULL, 'Williamsburg', 'Brooklyn', 'NY', '11211', 'Kings County',
             'NY', 'US');
 
@@ -83,10 +83,10 @@ class MapsTest extends \PHPUnit_Framework_TestCase
         $API_KEY = 'api.key.123';
         $maps = new Google\Maps($API_KEY, $rest_client_stub);
 
-        $GEO_POINT = new Utils\GeoPoint('40.7155418', '-73.9533691');
+        $GEO_POINT = new Domain\GeoPoint('40.7155418', '-73.9533691');
         $reverse_geo_code = $maps->getReverseGeoCode($GEO_POINT);
 
-        $expected_reverse_geo_code = new Utils\ReverseGeoCode(
+        $expected_reverse_geo_code = new Domain\ReverseGeoCode(
             NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
         $this->assertEquals($expected_reverse_geo_code, $reverse_geo_code);

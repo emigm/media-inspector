@@ -2,8 +2,8 @@
 
 namespace MediaInspector\UnitTests;
 
+use MediaInspector\Domain;
 use MediaInspector\Instagram;
-use MediaInspector\Utils;
 
 class MediaTest extends \PHPUnit_Framework_TestCase
 {
@@ -12,7 +12,7 @@ class MediaTest extends \PHPUnit_Framework_TestCase
         $LATITUDE = 40.733497;
         $LONGITUDE = -74.058645;
 
-        $geo_point = new Utils\GeoPoint($LATITUDE, $LONGITUDE);
+        $geo_point = new Domain\GeoPoint($LATITUDE, $LONGITUDE);
 
         $ID = 'media123';
         $TYPE = 'photo';

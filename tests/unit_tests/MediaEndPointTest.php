@@ -6,7 +6,6 @@ use GuzzleHttp\Psr7;
 use GuzzleHttp\Psr7\Response;
 use MediaInspector\Domain;
 use MediaInspector\Instagram;
-use MediaInspector\Utils;
 
 class MediaEndPointTest extends \PHPUnit_Framework_TestCase
 {
@@ -31,7 +30,7 @@ class MediaEndPointTest extends \PHPUnit_Framework_TestCase
         $MEDIA_ID = '1081347983064313090';
         $media = $media_endpoint->getMedia($MEDIA_ID);
 
-        $expected_geo_point = new Utils\GeoPoint('40.7155418', '-73.9533691');
+        $expected_geo_point = new Domain\GeoPoint('40.7155418', '-73.9533691');
         $expected_media = new Instagram\Media(
             '1081347983064313090_1220832186', 'image', $expected_geo_point);
 
@@ -59,7 +58,7 @@ class MediaEndPointTest extends \PHPUnit_Framework_TestCase
         $MEDIA_ID = '420077066';
         $media = $media_endpoint->getMedia($MEDIA_ID);
 
-        $expected_geo_point = new Utils\GeoPoint(NULL, NULL);
+        $expected_geo_point = new Domain\GeoPoint(NULL, NULL);
         $expected_media = new Instagram\Media(
             '420077066_4190444', 'image', $expected_geo_point);
 
