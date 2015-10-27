@@ -19,11 +19,10 @@ class RESTClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testPost()
     {
-        $access_token = getenv('TEST_INSTAGRAM_ACCESS_TOKEN');
         $client = new RESTAdapter\RESTClient('https://api.instagram.com');
 
         $URI = '/v1/locations/614396723';
-        $QUERY = ['access_token' => $access_token];
+        $QUERY = ['access_token' => 'accessToken123'];
 
         $response = $client->post($URI, $QUERY);
     }
@@ -40,7 +39,7 @@ class RESTClientTest extends \PHPUnit_Framework_TestCase
             'https://api.instagram.com', new MockHandler([$MOCK_RESPONSE]));
 
         $URI = '/v1/locations/614396723';
-        $QUERY = ['access_token' => $access_token];
+        $QUERY = ['access_token' => 'accessToken123'];
         $HEADERS = ['Accept' => 'application/json'];
         $TIMEOUT = 3.0;
 
@@ -56,13 +55,13 @@ class RESTClientTest extends \PHPUnit_Framework_TestCase
             400, 
             ['Content-Type' => 'application/json; charset=UTF-8'],
             Psr7\stream_for(
-                fopen(__DIR__.'/mocks/rest_client_bad_request.txt', 'r')));
+                fopen(__DIR__.'/mocks/rest_client_400_Bad_Request.txt', 'r')));
 
         $client = new RESTAdapter\RESTClient(
             'https://api.instagram.com', new MockHandler([$MOCK_RESPONSE]));
 
         $INVALID_URI = '/v1/location/614396723';
-        $QUERY = ['access_token' => $access_token];
+        $QUERY = ['access_token' => 'accessToken123'];
         $HEADERS = ['Accept' => 'application/json'];
 
         $response_body = $client->get($INVALID_URI, $QUERY, $HEADERS);
@@ -77,11 +76,10 @@ class RESTClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testPut()
     {
-        $access_token = getenv('TEST_INSTAGRAM_ACCESS_TOKEN');
         $client = new RESTAdapter\RESTClient('https://api.instagram.com');
 
         $URI = '/v1/locations/614396723';
-        $QUERY = ['access_token' => $access_token];
+        $QUERY = ['access_token' => 'accessToken123'];
 
         $response = $client->put($URI, $QUERY);
     }
@@ -92,11 +90,10 @@ class RESTClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testDelete()
     {
-        $access_token = getenv('TEST_INSTAGRAM_ACCESS_TOKEN');
         $client = new RESTAdapter\RESTClient('https://api.instagram.com');
 
         $URI = '/v1/locations/614396723';
-        $QUERY = ['access_token' => $access_token];
+        $QUERY = ['access_token' => 'accessToken123'];
 
         $response = $client->delete($URI, $QUERY);
     }
