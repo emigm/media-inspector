@@ -46,12 +46,10 @@ class RESTClientTest extends \PHPUnit_Framework_TestCase
 
         $response_body = $client->get($URI, $QUERY, $HEADERS, $TIMEOUT);
 
-        $this->assertEquals($MOCK_RESPONSE->getBody(), $response_body);
+        $this->assertEquals($MOCK_RESPONSE->getStatusCode(), 200);
+        $this->assertEquals($MOCK_RESPONSE->getBody(), $response_body->getBody());
     }
 
-    /**
-     * @expectedException MediaInspector\Exception\ClientException
-     */
     public function testGetClientError()
     {
         $MOCK_RESPONSE = new Response(
@@ -60,20 +58,17 @@ class RESTClientTest extends \PHPUnit_Framework_TestCase
             Psr7\stream_for(
                 fopen(__DIR__.'/mocks/rest_client_bad_request.txt', 'r')));
 
-        $INVALID_URI = '/v1/invalid/614396723';
+        $client = new RESTAdapter\RESTClient(
+            'https://api.instagram.com', new MockHandler([$MOCK_RESPONSE]));
+
+        $INVALID_URI = '/v1/location/614396723';
         $QUERY = ['access_token' => $access_token];
         $HEADERS = ['Accept' => 'application/json'];
 
-        $MOCK_REQUEST = new Request('GET', $INVALID_URI, $HEADERS);
+        $response_body = $client->get($INVALID_URI, $QUERY, $HEADERS);
 
-        $client = new RESTAdapter\RESTClient(
-            'https://api.instagram.com', new MockHandler([
-                new GuzzleException\ClientException(
-                    'Exception', $MOCK_REQUEST, $MOCK_RESPONSE)
-            ])
-        );
-
-        $response = $client->get($INVALID_URI, $QUERY, $HEADERS);
+        $this->assertEquals($MOCK_RESPONSE->getStatusCode(), 400);
+        $this->assertEquals($MOCK_RESPONSE->getBody(), $response_body->getBody());
     }
 
     /**

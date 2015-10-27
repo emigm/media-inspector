@@ -2,6 +2,6 @@
     "meta": {
         "error_type": "APINotFoundError",
         "code": 400,
-        "error_message": "invalid media id"
+        "error_message": "Invalid location id"
     }
 }
